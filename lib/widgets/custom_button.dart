@@ -26,7 +26,7 @@ class CustomElevatedButton extends StatelessWidget {
         maximumSize: Size(width, height * 0.06),
       ),
       onPressed: onPressed,
-      child: Text(text, style: TextStyle(fontSize: 20)),
+      child: Text(text, style: const TextStyle(fontSize: 20)),
     );
   }
 }
