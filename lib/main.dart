@@ -49,7 +49,7 @@ class ScolarChat extends StatelessWidget {
                 ),
               ],
             )),
-        duration: 3000,
+        duration: 2500,
       ),
     );
   }

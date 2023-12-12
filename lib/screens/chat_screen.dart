@@ -85,6 +85,11 @@ class ChatScreen extends StatelessWidget {
                         curve: Curves.easeIn,
                       );
                     },
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                     decoration: InputDecoration(
                       focusColor: Color(0xff414141),
                       fillColor: Color(0xff414141),
