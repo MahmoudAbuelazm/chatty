@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:scholar_chat/widgets/custom_button.dart';
 
@@ -9,7 +10,7 @@ import 'chat_screen.dart';
 import 'rigester_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  static String id = 'login_screen';
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -20,17 +21,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
   String? password;
   bool isloding = false;
+  bool isChecked = false;
 
   GlobalKey<FormState> formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
 
     return ModalProgressHUD(
       inAsyncCall: isloding,
       child: Scaffold(
-        backgroundColor: const Color(0xff2B475E),
+        backgroundColor: const Color(0xff1E1E1E),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Form(
@@ -38,43 +41,31 @@ class _LoginScreenState extends State<LoginScreen> {
             child: ListView(
               children: [
                 SizedBox(
-                  height: height * 0.2,
+                  height: height * 0.08,
                 ),
-                Image.asset(
-                  'assets/images/scholar.png',
-                  height: 100,
-                ),
-                SizedBox(
-                  height: height * 0.005,
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Scolar Chat",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontFamily: 'Pacifico'),
+                Center(
+                  child: Text(
+                    'Chatty',
+                    style: GoogleFonts.atomicAge(
+                      fontSize: 38,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
                     ),
-                  ],
+                  ),
                 ),
                 SizedBox(
-                  height: height * 0.01,
+                  height: height * 0.05,
                 ),
-                const Row(
-                  children: [
-                    Text(
-                      "LOGIN",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                      ),
-                    ),
-                  ],
+                Text(
+                  "Login to your Account",
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 SizedBox(
-                  height: height * 0.01,
+                  height: height * 0.02,
                 ),
                 CustomFormTextField(
                   hint: "Email",
@@ -93,7 +84,42 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                 ),
                 SizedBox(
-                  height: height * 0.05,
+                  height: height * 0.01,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Checkbox(
+                      fillColor: MaterialStateProperty.all(Colors.white),
+                      checkColor: Colors.black,
+                      value: isChecked,
+                      onChanged: (value) {
+                        isChecked = value!;
+                        setState(() {});
+                      },
+                    ),
+                    Text(
+                      "Remember me.",
+                      style: GoogleFonts.inter(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      "Forget password..?",
+                      style: GoogleFonts.inter(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: height * 0.02,
                 ),
                 CustomElevatedButton(
                   onPressed: () async {
@@ -103,7 +129,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       try {
                         await loginUser();
                         showSnackBar(context, 'Successfully Registered');
-                        Navigator.pushNamed(context, ChatScreen.id,arguments: email);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => ChatScreen(
+                                      email: email!,
+                                    )));
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
                           showSnackBar(
@@ -123,19 +154,88 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   text: "Login",
                 ),
+                SizedBox(
+                  height: height * 0.025,
+                ),
+                Text(
+                  'Or login with',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    color: Colors.white.withOpacity(.75),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(
+                  height: height * 0.04,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(height * .08, height * .08),
+                        backgroundColor: Colors.white.withOpacity(0),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Colors.white,
+                          ),
+                          borderRadius: BorderRadius.circular(13),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Image.asset(
+                        'assets/images/google.png',
+                      ),
+                    ),
+                    SizedBox(
+                      width: width * .05,
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(height * .09, height * .08),
+                        backgroundColor: Colors.white.withOpacity(0),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: Colors.white,
+                          ),
+                          borderRadius: BorderRadius.circular(13),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Image.asset(
+                        'assets/images/facebook.png',
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: height * 0.08,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
                       "Don't have an account?",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(.47),
+                        fontSize: 19,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, RegisterScreen.id);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => RegisterScreen()));
                       },
                       child: const Text("Sign Up",
-                          style: TextStyle(color: Color(0xffC7EDE6))),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 19,
+                            fontWeight: FontWeight.w600,
+                          )),
                     ),
                   ],
                 )

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-   CustomElevatedButton({
+  CustomElevatedButton({
     required this.text,
     required this.onPressed,
   });
   VoidCallback onPressed;
-
 
   final String text;
   @override
@@ -18,7 +18,7 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
         ),
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
@@ -26,7 +26,11 @@ class CustomElevatedButton extends StatelessWidget {
         maximumSize: Size(width, height * 0.06),
       ),
       onPressed: onPressed,
-      child: Text(text, style: const TextStyle(fontSize: 20)),
+      child: Text(text, style: GoogleFonts.poppins(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xff23285C),
+                ),),
     );
   }
 }

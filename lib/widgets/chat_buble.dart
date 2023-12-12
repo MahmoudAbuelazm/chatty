@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scholar_chat/model/message.dart';
 
 import '../constant.dart';
@@ -14,29 +15,24 @@ class ChatBuble extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
-        padding: const EdgeInsets.only(
-          left: 16,
-          top: 16,
-          bottom: 16,
-          right: 16,
-        ),
-        margin: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 16,
-        ),
-        decoration: const BoxDecoration(
+        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 17, vertical: 10),
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(32),
-            topRight: Radius.circular(32),
-            bottomRight: Radius.circular(32),
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomRight: Radius.circular(10),
           ),
-          color: kPrimarycolor,
+          color: Color(0xff414141),
         ),
-        child: Center(
-            child: Text(
+        child: Text(
           message.message,
-          style: TextStyle(color: Colors.white),
-        )),
+          style: GoogleFonts.poppins(
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
@@ -53,29 +49,22 @@ class ChatBubleForFriend extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
-        padding: const EdgeInsets.only(
-          left: 16,
-          top: 16,
-          bottom: 16,
-          right: 16,
-        ),
-        margin: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 16,
-        ),
-        decoration: const BoxDecoration(
+        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: EdgeInsets.symmetric(horizontal: 17, vertical: 10),
+        decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(32),
-            topRight: Radius.circular(32),
-            bottomLeft: Radius.circular(32),
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+            bottomLeft: Radius.circular(10),
           ),
-          color: Color(0xff006D84),
+          color: Color(0xff23285C),
         ),
-        child: Center(
-            child: Text(
+        child: Text(
           message.message,
-          style: TextStyle(color: Colors.white),
-        )),
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
